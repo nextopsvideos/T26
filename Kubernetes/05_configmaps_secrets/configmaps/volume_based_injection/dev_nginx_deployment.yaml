@@ -1,0 +1,26 @@
+apiVersion: apps/v1
+kind: Deployment #dev env
+metadata:
+  name: nginx-dev
+spec:
+  replicas: 4
+  selector:
+    matchLabels:
+      app: nginx-dev
+  template:
+    metadata:
+      labels:
+        app: nginx-dev
+    spec:
+      containers:
+      - name: nginx-dev
+        image: nginx  #in nginx.confg default worker_connections: 512        
+        ports:
+        - containerPort: 8080
+        volumeMounts:
+        - name: nginx-default-conf-volume
+          mountPath: /etc/nginx/conf.d/
+      volumes:
+      - name: nginx-default-conf-volume 
+        configMap: 
+          name: dev-nginx-default-conf
