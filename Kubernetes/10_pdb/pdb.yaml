@@ -1,0 +1,14 @@
+apiVersion: policy/v1 
+kind: PodDisruptionBudget
+metadata:
+  name: my-app-pdb 
+spec:
+  minAvailable: 1
+  selector:
+    matchLabels:
+      app: my-app
+
+# total worker 3 nodes
+# 1st worker node - 2 copies - drain
+# 2nd worker node - 1 copy + 1 copy - drain
+# 3rd worker node - 1 copy + 1 copy + 1 copy(pending) + 1 copy (pending) - drain
