@@ -1,3 +1,9 @@
+#To add label and taint
+# kubectl label node <node name> gpuEnabled=yes (per below node selector attribute)
+# kubectl taint node <node name> gpuEnabled=yes:Noschedule (per below tolerations)
+#To remove label and taint
+# kubectl label node <node name> gpuEnabled- (per below node selector attribute)
+# kubectl taint node <node name> gpuEnabled:Noschedule-  (per below tolerations)
 apiVersion: apps/v1
 kind: Deployment
 metadata:
