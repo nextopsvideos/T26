@@ -20,11 +20,6 @@ resource "azurerm_kubernetes_cluster" "aks" {
     name       = "default"
     node_count = var.node_count
     vm_size    = "standard_d2als_v6"
-    upgrade_settings {
-      drain_timeout_in_minutes = "0"
-      max_surge = "10%"
-      node_soak_duration_in_minutes = "0"
-    }
   }
 
   identity {
@@ -34,11 +29,6 @@ resource "azurerm_kubernetes_cluster" "aks" {
   tags = {
     Environment = var.env
   }
-
-  lifecycle {
-    ignore_changes = [ tags ]
-  }
-
 }
 
 resource "azurerm_role_assignment" "aks2acr" {
